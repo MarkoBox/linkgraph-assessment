@@ -1,6 +1,7 @@
 from django.db.models import QuerySet, Manager
 import requests
 from django.utils import timezone
+from django.db import connection
 
 
 class ApiCallHistoryQuerySet(QuerySet):
@@ -31,12 +32,13 @@ class CoinManager(Manager):
         return ApiCallHistoryQuerySet(self.model, using=self._db)
 
     def update_new_coins(self):
-        inserted_rows = self.model.objects.raw("""INSERT INTO market_data_coin(ticker_symbol)
+        with connection.cursor() as cursor:
+            cursor.execute("""INSERT INTO market_data_coin(ticker_symbol)
         SELECT DISTINCT returned_json ->> 'symbol' from market_data_apicallhistory
         LEFT JOIN market_data_coin
             ON  returned_json ->> 'symbol' = market_data_coin.ticker_symbol
         WHERE market_data_coin.ticker_symbol IS NULL;""")
-        return inserted_rows
+        return None
 
 
 class TradeDataQuerySet(QuerySet):
@@ -48,7 +50,8 @@ class TradeDataManager(Manager):
         return TradeDataQuerySet(self.model, using=self._db)
 
     def import_data_updated_at(self, update_time):
-        inserter_rows = self.model.objects.raw(raw_query="""WITH new_data AS (
+        with connection.cursor() as cursor:
+            cursor.execute("""WITH new_data AS (
         SELECT returned_json, update_time, market_data_coin.id AS coin_id
         FROM market_data_apicallhistory
                 LEFT JOIN market_data_coin
@@ -61,4 +64,4 @@ class TradeDataManager(Manager):
                    CAST(new_data.returned_json ->> 'weighted_price' AS DECIMAL),
                    new_data.update_time,
                    new_data.coin_id FROM new_data;""", params=[update_time])
-        return inserter_rows
+        return None
