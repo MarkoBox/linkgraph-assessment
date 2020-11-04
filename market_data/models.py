@@ -21,7 +21,7 @@ class TradeData(models.Model):
     weighted_price = models.DecimalField(max_digits=25, decimal_places=4, null=True, blank=True,
                                          verbose_name='Weighted Price')
     update_time = models.DateTimeField()
-    coin = models.ForeignKey(Coin, on_delete=models.CASCADE, null=True, blank=True)
+    coin = models.ForeignKey(Coin, on_delete=models.CASCADE, null=True, blank=True, related_name='trade_data')
 
     objects = TradeDataManager()
 
