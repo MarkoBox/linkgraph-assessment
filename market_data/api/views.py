@@ -10,5 +10,4 @@ class LatestTradeDataView(generics.ListAPIView):
 
     def get_queryset(self):
         latest_update_time = TradeData.objects.latest('update_time').update_time
-        print(latest_update_time)
         return TradeData.objects.filter(update_time__exact=latest_update_time)

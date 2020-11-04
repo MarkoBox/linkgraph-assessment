@@ -24,7 +24,7 @@ SECRET_KEY = 'j&rdbpod$d+#p!tk7mk0nkgs-^*+(#34k_e^)_033&09#7!jrs'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
