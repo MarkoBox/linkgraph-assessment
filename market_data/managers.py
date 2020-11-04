@@ -19,7 +19,6 @@ class ApiCallHistoryManager(Manager):
         data = requests.get(url=url).json()
         objs = [self.model(returned_json=line, update_time=update_time) for line in data]
         self.model.objects.bulk_create(objs)
-        print(update_time)
         return self.model.objects.filter(update_time=update_time), update_time
 
 
