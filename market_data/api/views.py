@@ -16,7 +16,9 @@ class LatestTradeDataView(generics.ListAPIView):
 
     def get_queryset(self):
         latest_update_time = TradeData.objects.latest('update_time').update_time
-        return TradeData.objects.filter(update_time__exact=latest_update_time).order_by('-currency_volume')
+        return TradeData.objects.filter(update_time__exact=latest_update_time)\
+            .exclude(weighted_price__isnull=True)\
+            .order_by('-weighted_price')
 
 
 class CoinView(generics.ListAPIView):

@@ -76,10 +76,10 @@ WSGI_APPLICATION = 'linkgraph.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'linkgraph_test',
+         'NAME': 'linkgraph_test',#'NAME': 'postgres',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
-        'HOST': 'localhost',
+        'HOST': 'localhost', #linkgraph_db_1
         'PORT': '5432',
     }
 }
