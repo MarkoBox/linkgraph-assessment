@@ -15,7 +15,7 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Quick-start development settings - unsuitable for production
+# Quick-start.sh development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
@@ -76,10 +76,10 @@ WSGI_APPLICATION = 'linkgraph.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-         'NAME': 'linkgraph_test',#'NAME': 'postgres',
+        'NAME': 'postgres',#'NAME': 'postgres', 'NAME': 'linkgraph_test'
         'USER': 'postgres',
         'PASSWORD': 'postgres',
-        'HOST': 'localhost', #linkgraph_db_1
+        'HOST': 'linkgraph_db_1', #linkgraph_db_1 'HOST': 'localhost'
         'PORT': '5432',
     }
 }
