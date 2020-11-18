@@ -130,7 +130,7 @@ CELERY_RESULT_SERIALIZER = 'json'
 
 CELERY_BEAT_SCHEDULE = {
     'hello': {
-        'task': 'market_data.tasks.hello',
-        'schedule': crontab()  # execute every minute
+        'task': 'market_data.tasks.update_market_data_task',
+        'schedule': crontab(hour="*", minute=1)  # execute every hour
     }
 }

@@ -9,5 +9,6 @@ def update_market_data():
 
 
 @shared_task
-def hello():
-    print("Hello there!")
+def update_market_data_task():
+    update_market_data()
+    print("Market data updated!")
