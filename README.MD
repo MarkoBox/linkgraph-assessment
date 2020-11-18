@@ -19,6 +19,15 @@ $ docker-compose -f docker-compose.yml exec web python manage.py migrate --noinp
 $ docker-compose -f docker-compose.yml exec web python manage.py fetch_market_data
 ```
 
+Main page is avaible at:
+http://localhost:8000/
+
+Api endpoint are at:
+
+http://localhost:8000/api/trade-data
+
+http://localhost:8000/api/coin
+
 
 
 

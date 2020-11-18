@@ -7,6 +7,8 @@ services:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+  redis:
+    image: "redis"
   web:
     build:
       context: .
@@ -18,3 +20,24 @@ services:
       - "8000:8000"
     depends_on:
       - db
+      - redis
+  celery:
+    build:
+      context: .
+      dockerfile: ./compose/Dockerfile
+    command: celery -A linkgraph.celery_app worker -l info
+    volumes:
+      - .:/code
+    depends_on:
+      - db
+      - redis
+  celery-beat:
+    build:
+      context: .
+      dockerfile: ./compose/Dockerfile
+    command: celery -A linkgraph.celery_app beat -l info
+    volumes:
+      - .:/code
+    depends_on:
+      - db
+      - redis

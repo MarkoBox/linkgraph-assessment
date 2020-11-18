@@ -9,3 +9,5 @@ pytz==2020.4
 requests==2.24.0
 sqlparse==0.4.1
 urllib3==1.25.11
+celery==4.4.6
+redis==3.5.3
